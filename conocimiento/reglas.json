@@ -1,0 +1,167 @@
+[
+  {
+    "id": "R001",
+    "nombre": "Falla de fuente de poder",
+    "categoria": "hardware",
+    "condiciones": {"no_enciende": true, "sin_luces": true, "sin_ventiladores": true},
+    "conclusion": "falla_fuente_poder",
+    "acciones": ["Revisar cable de alimentacion", "Probar con otra fuente de poder", "Verificar regulador de voltaje"],
+    "prioridad": 1,
+    "explicacion": "El equipo no enciende, no hay luces ni ventiladores funcionando. Esto indica que la fuente de poder no esta suministrando energia.",
+    "activa": true
+  },
+  {
+    "id": "R002",
+    "nombre": "Falla de memoria RAM",
+    "categoria": "hardware",
+    "condiciones": {"pitidos_continuos": true, "pantalla_negra": true},
+    "conclusion": "falla_memoria_ram",
+    "acciones": ["Limpiar contactos de la RAM con borrador", "Reinsertar los modulos de memoria", "Probar cada modulo por separado", "Reemplazar modulo danado"],
+    "prioridad": 2,
+    "explicacion": "Los pitidos continuos y la pantalla negra son sintomas clasicos de falla en la memoria RAM.",
+    "activa": true
+  },
+  {
+    "id": "R003",
+    "nombre": "Sobrecalentamiento",
+    "categoria": "hardware",
+    "condiciones": {"se_apaga_solo": true, "calor_excesivo": true},
+    "conclusion": "sobrecalentamiento",
+    "acciones": ["Limpiar el polvo de los ventiladores", "Verificar que los ventiladores giren libremente", "Aplicar nueva pasta termica al procesador", "Mejorar ventilacion del gabinete"],
+    "prioridad": 3,
+    "explicacion": "El equipo se apaga solo y se siente muy caliente. El sobrecalentamiento puede danar componentes internos.",
+    "activa": true
+  },
+  {
+    "id": "R004",
+    "nombre": "Conflicto de controladores",
+    "categoria": "software",
+    "condiciones": {"pantalla_azul": true, "instalacion_reciente": true},
+    "conclusion": "conflicto_controladores",
+    "acciones": ["Ingresar a modo seguro", "Desinstalar controladores recien instalados", "Restaurar sistema a un punto anterior", "Descargar controladores oficiales"],
+    "prioridad": 4,
+    "explicacion": "La pantalla azul despues de una instalacion reciente sugiere conflicto con controladores nuevos.",
+    "activa": true
+  },
+  {
+    "id": "R005",
+    "nombre": "Falla de disco duro o SSD",
+    "categoria": "hardware",
+    "condiciones": {"ruidos_extranos": true, "sistema_lento": true},
+    "conclusion": "falla_disco_duro",
+    "acciones": ["Realizar backup inmediato de datos", "Ejecutar revision de disco (CHKDSK)", "Verificar estado SMART del disco", "Reemplazar disco danado"],
+    "prioridad": 5,
+    "explicacion": "Ruidos extranos (clics, rechinidos) combinados con lentitud indican falla mecanica inminente del disco.",
+    "activa": true
+  },
+  {
+    "id": "R006",
+    "nombre": "Falla de tarjeta de video",
+    "categoria": "hardware",
+    "condiciones": {"pantalla_negra": true, "ventiladores_funcionan": true, "sin_pitidos": true},
+    "conclusion": "falla_tarjeta_video",
+    "acciones": ["Verificar que el monitor este encendido y conectado", "Reinsertar tarjeta de video", "Probar con otro monitor o cable", "Reemplazar tarjeta de video si es necesario"],
+    "prioridad": 6,
+    "explicacion": "El equipo enciende (ventiladores giran, no hay pitidos) pero la pantalla permanece negra.",
+    "activa": true
+  },
+  {
+    "id": "R007",
+    "nombre": "Dano en sistema operativo",
+    "categoria": "software",
+    "condiciones": {"pantalla_azul": true, "reinicios": true, "sin_cambios": true},
+    "conclusion": "falla_sistema_operativo",
+    "acciones": ["Intentar reparacion de inicio", "Ejecutar restaurar sistema", "Realizar reparacion con disco de instalacion", "Reinstalar sistema operativo"],
+    "prioridad": 7,
+    "explicacion": "Pantallazos azules y reinicios sin haber realizado cambios recientes indican corrupcion del sistema operativo.",
+    "activa": true
+  },
+  {
+    "id": "R008",
+    "nombre": "Infeccion por malware",
+    "categoria": "software",
+    "condiciones": {"sistema_lento": true, "ventanas_emergentes": true},
+    "conclusion": "infeccion_malware",
+    "acciones": ["Ejecutar antivirus en modo seguro", "Usar Windows Defender", "Usar Malwarebytes", "Eliminar archivos temporales"],
+    "prioridad": 8,
+    "explicacion": "Lentitud extrema combinada con ventanas emergentes indican infeccion por malware.",
+    "activa": true
+  },
+  {
+    "id": "R009",
+    "nombre": "Falla de ventiladores",
+    "categoria": "hardware",
+    "condiciones": {"ruidos_extranos": true, "calor_excesivo": true},
+    "conclusion": "falla_ventilador",
+    "acciones": ["Limpiar ventiladores con aire comprimido", "Verificar que giren libremente", "Lubricar ventiladores", "Reemplazar ventiladores defectuosos"],
+    "prioridad": 9,
+    "explicacion": "Ruidos extranos y sobrecalentamiento indican que los ventiladores no funcionan correctamente.",
+    "activa": true
+  },
+  {
+    "id": "R010",
+    "nombre": "Problema de conexion a Internet",
+    "categoria": "red",
+    "condiciones": {"sin_internet": true, "configuracion_cambiada": true},
+    "conclusion": "problema_red",
+    "acciones": ["Reiniciar modem y router", "Verificar cable de red", "Ejecutar solucion de problemas", "Restablecer configuracion de red"],
+    "prioridad": 10,
+    "explicacion": "La perdida de Internet luego de cambios en configuracion sugiere problema de red.",
+    "activa": true
+  },
+  {
+    "id": "R011",
+    "nombre": "Problema con perifericos",
+    "categoria": "software",
+    "condiciones": {"perifericos_no_funcionan": true, "controladores_viejos": true},
+    "conclusion": "problema_controladores",
+    "acciones": ["Reconectar dispositivo", "Probar en otro puerto USB", "Actualizar controladores", "Reinstalar controladores"],
+    "prioridad": 11,
+    "explicacion": "Perifericos no funcionan por controladores desactualizados o corruptos.",
+    "activa": true
+  },
+  {
+    "id": "R012",
+    "nombre": "Falla de fuente de poder (reinicios)",
+    "categoria": "hardware",
+    "condiciones": {"reinicios_frecuentes": true, "fuente_poder_ruidosa": true},
+    "conclusion": "falla_fuente_poder",
+    "acciones": ["Verificar potencia de fuente", "Revisar conexiones internas", "Probar con fuente de repuesto", "Reemplazar fuente"],
+    "prioridad": 12,
+    "explicacion": "Reinicios frecuentes y ruidos de fuente indican falla en la fuente de poder.",
+    "activa": true
+  },
+  {
+    "id": "R013",
+    "nombre": "Falla de disco duro (BSOD)",
+    "categoria": "hardware",
+    "condiciones": {"pantalla_azul": true, "codigo_error_7B": true},
+    "conclusion": "falla_disco_duro",
+    "acciones": ["Revisar conexiones del disco", "Ejecutar CHKDSK", "Verificar estado SMART", "Reemplazar disco"],
+    "prioridad": 13,
+    "explicacion": "Error 0x0000007B indica que Windows no puede acceder al disco de inicio.",
+    "activa": true
+  },
+  {
+    "id": "R014",
+    "nombre": "Boton de encendido defectuoso",
+    "categoria": "hardware",
+    "condiciones": {"no_enciende": true, "boton_encendido_suave": true},
+    "conclusion": "boton_defectuoso",
+    "acciones": ["Verificar boton de encendido", "Probar encendiendo desde placa madre", "Reemplazar boton"],
+    "prioridad": 14,
+    "explicacion": "El boton de encendido se siente diferente, impidiendo encender el equipo.",
+    "activa": true
+  },
+  {
+    "id": "R015",
+    "nombre": "Memoria RAM insuficiente",
+    "categoria": "hardware",
+    "condiciones": {"congelamientos": true, "ram_insuficiente": true},
+    "conclusion": "ram_insuficiente",
+    "acciones": ["Cerrar programas innecesarios", "Agregar mas RAM", "Aumentar memoria virtual", "Actualizar SO a 64 bits"],
+    "prioridad": 15,
+    "explicacion": "El equipo se congela por falta de memoria RAM para las tareas actuales.",
+    "activa": true
+  }
+]

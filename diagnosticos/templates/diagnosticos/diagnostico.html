@@ -1,0 +1,118 @@
+{% extends "diagnosticos/base.html" %}
+{% load static %}
+
+{% block title %}Diagnóstico - Sistema Experto{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    {% if pregunta_actual %}
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="diagnostico-header mb-4">
+                <h2><i class="fas fa-stethoscope text-primary"></i> Diagnóstico en Curso</h2>
+                <p class="text-muted">Responda las preguntas para obtener un diagnóstico preciso.</p>
+            </div>
+
+            <div class="progress-bar-container mb-4">
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Progreso del diagnóstico</span>
+                    <span>{{ pregunta_numero }} de {{ total_preguntas }}</span>
+                </div>
+                <div class="progress" style="height: 12px;">
+                    <div class="progress-bar progress-bar-animated progress-bar-striped" 
+                         role="progressbar" 
+                         style="width: {{ progreso }}%;" 
+                         aria-valuenow="{{ progreso }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                        {{ progreso }}%
+                    </div>
+                </div>
+            </div>
+
+            <div class="card unefa-card pregunta-card" id="pregunta-card">
+                <div class="card-body p-4">
+                    <div class="pregunta-header mb-3">
+                        <small class="text-muted">Pregunta {{ pregunta_numero }} de {{ total_preguntas }}</small>
+                        <span class="badge bg-info ms-2">{{ pregunta_actual.categoria }}</span>
+                    </div>
+                    <h4 class="pregunta-texto mb-4">
+                        <i class="fas fa-question-circle text-primary me-2"></i>
+                        {{ pregunta_actual.pregunta }}
+                    </h4>
+
+                    <div class="opciones-container" id="opciones-container">
+                        {% for opcion in pregunta_actual.opciones %}
+                        <button class="btn btn-outline-unefa opcion-btn w-100 text-start mb-2" 
+                                data-valor="{{ opcion.valor|lower }}"
+                                data-pregunta-id="{{ pregunta_actual.id }}"
+                                onclick="responderPregunta('{{ pregunta_actual.id }}', '{{ opcion.valor|lower }}')">
+                            <i class="fas fa-circle-notch me-2"></i>
+                            {{ opcion.etiqueta }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3" id="historial-respuestas">
+                <div class="card-header">
+                    <h5><i class="fas fa-list"></i> Historial de Respuestas</h5>
+                </div>
+                <div class="card-body" id="historial-body">
+                    <p class="text-muted mb-0"><small>Las respuestas aparecerán aquí a medida que avance.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="diagnostico-header mb-4">
+                <h2><i class="fas fa-stethoscope text-primary"></i> Iniciar Diagnóstico</h2>
+                <p class="text-muted">Seleccione el síntoma principal que presenta el equipo para comenzar el diagnóstico.</p>
+            </div>
+
+            {% if ultimo_diagnostico and ultimo_diagnostico.estado == 'en_curso' %}
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i> 
+                Tiene un diagnóstico en curso del día {{ ultimo_diagnostico.fecha_inicio|date:"d/m/Y H:i" }}.
+                <a href="{% url 'ver_diagnostico' ultimo_diagnostico.id %}" class="alert-link">Continuar diagnóstico</a>
+            </div>
+            {% endif %}
+
+            <div class="row" id="sintomas-grid">
+                {% for sintoma in sintomas %}
+                <div class="col-md-4 col-sm-6 mb-3">
+                    <div class="card sintoma-card h-100" onclick="seleccionarSintoma('{{ sintoma.id }}')">
+                        <div class="card-body text-center">
+                            <i class="fas fa-{% if sintoma.categoria == 'encendido' %}power-off{% elif sintoma.categoria == 'pantalla' %}desktop{% elif sintoma.categoria == 'temperatura' %}thermometer-half{% elif sintoma.categoria == 'rendimiento' %}tachometer-alt{% elif sintoma.categoria == 'software' %}bug{% elif sintoma.categoria == 'red' %}wifi{% elif sintoma.categoria == 'hardware' %}microchip{% elif sintoma.categoria == 'arranque' %}bell{% elif sintoma.categoria == 'comportamiento' %}sync{% elif sintoma.categoria == 'mantenimiento' %}broom{% elif sintoma.categoria == 'perifericos' %}keyboard{% elif sintoma.categoria == 'fuente' %}plug{% elif sintoma.categoria == 'sistema' %}windows{% else %}question-circle{% endif %} fa-3x sintoma-icon mb-3"></i>
+                            <h5>{{ sintoma.nombre }}</h5>
+                            <p class="text-muted small">{{ sintoma.descripcion|truncatechars:60 }}</p>
+                            <span class="badge bg-{% if sintoma.gravedad == 'critico' %}danger{% elif sintoma.gravedad == 'medio' %}warning{% else %}info{% endif %}">
+                                {{ sintoma.gravedad|upper }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <form id="form-sintoma" method="POST" action="{% url 'iniciar_diagnostico' %}" style="display:none;">
+                {% csrf_token %}
+                <input type="hidden" name="sintoma_principal" id="sintoma-seleccionado">
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/preguntas.js' %}"></script>
+<script src="{% static 'js/diagnostico.js' %}"></script>
+<script>
+    var DIAGNOSTICO_ID = {{ diagnostico.id|default:'null' }};
+    var CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+{% endblock %}

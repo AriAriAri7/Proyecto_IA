@@ -1,0 +1,200 @@
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.animate-fade-in-delay {
+    animation: fadeIn 0.6s ease 0.2s forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+    animation: fadeIn 0.6s ease 0.4s forwards;
+    opacity: 0;
+}
+
+/* Slide Up */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Scale In */
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.animate-scale-in.delay-1 {
+    animation-delay: 0.15s;
+}
+
+.animate-scale-in.delay-2 {
+    animation-delay: 0.3s;
+}
+
+/* Float animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Pulse */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Spin */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-left {
+    animation: slideInLeft 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-right {
+    animation: slideInRight 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-bounce-in {
+    animation: bounceIn 0.8s ease forwards;
+}
+
+/* Shake */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+    animation: shake 0.6s ease;
+}
+
+/* Progress bar animation */
+.progress-bar-animated {
+    animation: progressBarStripe 1s linear infinite;
+}
+
+@keyframes progressBarStripe {
+    0% { background-position: 1rem 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Toast notification */
+@keyframes slideInToast {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutToast {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100%); }
+}
+
+.toast-show {
+    animation: slideInToast 0.3s ease forwards;
+}
+
+.toast-hide {
+    animation: slideOutToast 0.3s ease forwards;
+}
+
+/* Hover effects */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Page transition */
+@keyframes pageEnter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+    animation: pageEnter 0.4s ease forwards;
+}
+
+/* Typing indicator */
+@keyframes typingDot {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+}
+
+.typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--unefa-primary);
+    border-radius: 50%;
+    animation: typingDot 1.4s ease-in-out infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}

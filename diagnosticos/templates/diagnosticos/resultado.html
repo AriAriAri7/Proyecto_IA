@@ -1,0 +1,118 @@
+{% extends "diagnosticos/base.html" %}
+{% load static %}
+{% load diagnosticos_tags %}
+
+{% block title %}Resultado del Diagnóstico - Sistema Experto{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="resultado-header text-center mb-4 animate-fade-in">
+                <h2><i class="fas fa-clipboard-check text-primary"></i> Resultado del Diagnóstico</h2>
+                <p class="text-muted">Diagnóstico #{{ diagnostico.id }} - {{ diagnostico.fecha_fin|date:"d/m/Y H:i"|default:"En curso" }}</p>
+            </div>
+
+            {% if falla %}
+            <div class="card resultado-card mb-4 animate-slide-up">
+                <div class="card-body text-center p-5">
+                    <div class="resultado-icon mb-3">
+                        <i class="fas fa-{{ falla.icono }} fa-5x text-primary"></i>
+                    </div>
+                    <span class="badge bg-{% if falla.gravedad == 'critico' %}danger{% elif falla.gravedad == 'medio' %}warning{% else %}info{% endif %} mb-3" style="font-size:1rem;">
+                        <i class="fas fa-exclamation-triangle"></i> {{ falla.gravedad|upper }}
+                    </span>
+                    <h3 class="mb-2">{{ falla.nombre }}</h3>
+                    <p class="lead text-muted">{{ falla.descripcion }}</p>
+
+                    <div class="row mt-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="confianza-card">
+                                <h5>Nivel de Confianza</h5>
+                                <div class="progress" style="height:25px;">
+                                    <div class="progress-bar" style="width:{{ diagnostico.confianza }}%;background-color:{{ diagnostico.confianza|porcentaje_a_color }};">
+                                        {{ diagnostico.confianza }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="confianza-card">
+                                <h5>Tiempo de Respuesta</h5>
+                                <p class="h4">{{ diagnostico.tiempo_respuesta|floatformat:2 }}s</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="confianza-card">
+                                <h5>Tiempo de Reparación Estimado</h5>
+                                <p class="h4">{{ falla.tiempo_reparacion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4 animate-slide-up delay-1">
+                <div class="card-header">
+                    <h4><i class="fas fa-tools"></i> Recomendaciones para Solucionar</h4>
+                </div>
+                <div class="card-body">
+                    <ol class="recomendaciones-list">
+                        {% for rec in recomendaciones %}
+                        <li class="mb-2">{{ rec }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+
+            {% if reglas_detalle %}
+            <div class="card mb-4 animate-slide-up delay-2">
+                <div class="card-header">
+                    <h4><i class="fas fa-gavel"></i> Reglas que Coincidieron</h4>
+                </div>
+                <div class="card-body">
+                    {% for regla in reglas_detalle %}
+                    <div class="regla-activada mb-3">
+                        <h5><span class="badge bg-primary me-2">{{ regla.id }}</span> {{ regla.nombre }}</h5>
+                        {% if regla.explicacion %}
+                        <p class="text-muted">{{ regla.explicacion }}</p>
+                        {% endif %}
+                        {% if regla.acciones %}
+                        <p class="mb-1"><strong>Acciones:</strong></p>
+                        <ul>
+                            {% for accion in regla.acciones %}
+                            <li>{{ accion }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% else %}
+            <div class="card resultado-card mb-4">
+                <div class="card-body text-center p-5">
+                    <i class="fas fa-question-circle fa-5x text-muted mb-3"></i>
+                    <h3>{{ diagnostico.diagnostico_final|default:"Diagnóstico no disponible" }}</h3>
+                    <p class="text-muted">No se pudo determinar una falla específica con la información proporcionada.</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="text-center mb-4">
+                <a href="{% url 'iniciar_diagnostico' %}" class="btn btn-primary btn-lg unefa-btn">
+                    <i class="fas fa-redo"></i> Realizar Nuevo Diagnóstico
+                </a>
+                <a href="{% url 'historial' %}" class="btn btn-outline-primary btn-lg ms-2">
+                    <i class="fas fa-history"></i> Ver Historial
+                </a>
+                <button onclick="window.print()" class="btn btn-outline-secondary btn-lg ms-2">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

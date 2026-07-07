@@ -1,0 +1,164 @@
+{% extends "diagnosticos/base.html" %}
+{% load static %}
+{% load diagnosticos_tags %}
+
+{% block title %}Inicio - Sistema Experto de Diagnostico{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-content">
+                <h1 class="hero-title animate-fade-in">Sistema Experto para Diagnóstico de Fallas</h1>
+                <p class="hero-subtitle animate-fade-in-delay">
+                    Herramienta inteligente para diagnosticar fallas críticas en computadores.
+                    Responda preguntas sencillas y obtenga un diagnóstico preciso con recomendaciones de solución.
+                </p>
+                <div class="hero-actions animate-fade-in-delay-2">
+                    <a href="{% url 'iniciar_diagnostico' %}" class="btn btn-primary btn-lg unefa-btn">
+                        <i class="fas fa-stethoscope"></i> Iniciar Diagnóstico
+                    </a>
+                    <a href="{% url 'manual' %}" class="btn btn-outline-light btn-lg ms-2">
+                        <i class="fas fa-book"></i> Manual de Uso
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center hero-image">
+                <img src="{% static 'img/logo_unefa.png' %}" alt="UNEFA" class="img-fluid hero-logo animate-float">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-3">
+                <div class="stat-card animate-slide-up">
+                    <i class="fas fa-check-circle stat-icon"></i>
+                    <h3 class="stat-number">{{ diagnosticos_completados }}</h3>
+                    <p class="stat-label">Diagnósticos Completados</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <div class="stat-card animate-slide-up delay-1">
+                    <i class="fas fa-tools stat-icon"></i>
+                    <h3 class="stat-number">{{ total_diagnosticos }}</h3>
+                    <p class="stat-label">Diagnósticos Totales</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <div class="stat-card animate-slide-up delay-2">
+                    <i class="fas fa-gavel stat-icon"></i>
+                    <h3 class="stat-number">{{ total_reglas }}</h3>
+                    <p class="stat-label">Reglas de Diagnóstico</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <div class="stat-card animate-slide-up delay-3">
+                    <i class="fas fa-question-circle stat-icon"></i>
+                    <h3 class="stat-number">22</h3>
+                    <p class="stat-label">Preguntas de Evaluación</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <h2 class="section-title text-center">¿Cómo funciona?</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card animate-scale-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <h3>1. Selecciona el Síntoma</h3>
+                    <p>Elige el problema principal que presenta el equipo de la lista de síntomas comunes.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card animate-scale-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>2. Responde Preguntas</h3>
+                    <p>Contesta preguntas sencillas en lenguaje coloquial sobre el comportamiento del equipo.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card animate-scale-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>3. Obtén el Diagnóstico</h3>
+                    <p>El motor de inferencia analiza las respuestas y genera un diagnóstico preciso con soluciones.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if fallas_comunes %}
+<section class="fallas-section">
+    <div class="container">
+        <h2 class="section-title text-center">Fallas Más Comunes</h2>
+        <div class="row">
+            {% for falla in fallas_comunes %}
+            <div class="col-md-4 col-sm-6 mb-3">
+                <div class="falla-card">
+                    <div class="falla-card-body">
+                        <h5>{{ falla.falla_encontrada|default:"No especificada" }}</h5>
+                        <span class="badge bg-primary">{{ falla.total }} diagnóstico{{ falla.total|pluralize }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if ultimos_diagnosticos %}
+<section class="recent-section">
+    <div class="container">
+        <h2 class="section-title text-center">Últimos Diagnósticos</h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fecha</th>
+                        <th>Falla Detectada</th>
+                        <th>Confianza</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in ultimos_diagnosticos %}
+                    <tr>
+                        <td>{{ d.id }}</td>
+                        <td>{{ d.fecha_fin|date:"d/m/Y H:i" }}</td>
+                        <td>{{ d.diagnostico_final|truncatechars:40 }}</td>
+                        <td>
+                            <div class="progress" style="height:20px;">
+                                <div class="progress-bar" style="width:{{ d.confianza }}%;background-color:{{ d.confianza|porcentaje_a_color }};">
+                                    {{ d.confianza }}%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="{% url 'resultado' d.id %}" class="btn btn-sm btn-unefa">
+                                <i class="fas fa-eye"></i> Ver
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

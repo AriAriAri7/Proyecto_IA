@@ -1,0 +1,249 @@
+/* Extra small devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .hero-section {
+        padding: 2.5rem 0;
+    }
+
+    .hero-logo {
+        max-width: 150px;
+        margin-top: 1.5rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.6rem;
+    }
+
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.2rem;
+    }
+
+    .feature-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .feature-icon i {
+        font-size: 1.3rem;
+    }
+
+    .unefa-navbar .navbar-brand {
+        font-size: 0.95rem;
+    }
+
+    .unefa-navbar .brand-text {
+        display: none;
+    }
+
+    .pregunta-texto {
+        font-size: 1.05rem;
+    }
+
+    .opcion-btn {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+    }
+
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .resultado-icon i {
+        font-size: 3rem !important;
+    }
+
+    .manual-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .hero-actions .btn {
+        display: block;
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    .hero-actions .ms-2 {
+        margin-left: 0 !important;
+    }
+
+    .confianza-card {
+        margin-bottom: 0.8rem;
+    }
+
+    #sintomas-grid .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Small devices (tablets, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-section {
+        padding: 3rem 0;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .stat-card {
+        padding: 1.2rem;
+    }
+
+    .unefa-navbar .brand-text {
+        font-size: 0.9rem;
+    }
+
+    .hero-actions .btn {
+        display: inline-block;
+    }
+
+    #sintomas-grid .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Medium devices (desktops, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-section {
+        padding: 4rem 0;
+    }
+
+    .hero-logo {
+        max-width: 200px;
+    }
+
+    #sintomas-grid .col-md-4 {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+    }
+}
+
+/* Large devices (large desktops, 992px and up) */
+@media (min-width: 992px) {
+    .hero-section {
+        padding: 5rem 0;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    #sintomas-grid .col-md-4 {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+    }
+}
+
+/* Extra large devices (1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Landscape phones */
+@media (max-width: 767.98px) and (orientation: landscape) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+
+    .hero-logo {
+        max-width: 120px;
+    }
+
+    .hero-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* Tablet landscape */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .hero-title {
+        font-size: 2rem;
+    }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --unefa-bg: #1a1a2e;
+        --unefa-card-bg: #16213e;
+        --unefa-text: #e4e6eb;
+        --unefa-text-light: #b0b3b8;
+        --unefa-border: #2d2d44;
+        --unefa-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        --unefa-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card {
+        background: var(--unefa-card-bg);
+    }
+
+    .table {
+        color: var(--unefa-text);
+    }
+
+    .table-hover tbody tr:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .progress {
+        background: #2d2d44;
+    }
+
+    .text-muted {
+        color: var(--unefa-text-light) !important;
+    }
+
+    .modal-content {
+        background: var(--unefa-card-bg);
+        color: var(--unefa-text);
+    }
+
+    .close {
+        color: var(--unefa-text);
+    }
+}

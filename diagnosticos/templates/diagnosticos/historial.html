@@ -1,0 +1,175 @@
+{% extends "diagnosticos/base.html" %}
+{% load static %}
+{% load diagnosticos_tags %}
+
+{% block title %}Historial de Diagnósticos{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-history text-primary"></i> Historial de Diagnósticos</h2>
+        <a href="{% url 'iniciar_diagnostico' %}" class="btn btn-primary unefa-btn">
+            <i class="fas fa-plus"></i> Nuevo Diagnóstico
+        </a>
+    </div>
+
+    <ul class="nav nav-tabs mb-4" id="historialTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="todos-tab" data-bs-toggle="tab" data-bs-target="#todos" type="button">
+                <i class="fas fa-list"></i> Todos ({{ total }})
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="completados-tab" data-bs-toggle="tab" data-bs-target="#completados" type="button">
+                <i class="fas fa-check-circle"></i> Completados
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="estadisticas-tab" data-bs-toggle="tab" data-bs-target="#estadisticas" type="button">
+                <i class="fas fa-chart-bar"></i> Estadísticas
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="todos">
+            {% if diagnosticos %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="tabla-historial">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Falla Detectada</th>
+                            <th>Confianza</th>
+                            <th>Duración</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in diagnosticos %}
+                        <tr>
+                            <td>#{{ d.id }}</td>
+                            <td>{{ d.fecha_inicio|date:"d/m/Y H:i" }}</td>
+                            <td>{% estado_badge d.estado %}</td>
+                            <td>{{ d.diagnostico_final|default:"-"|truncatechars:50 }}</td>
+                            <td>
+                                {% if d.confianza > 0 %}
+                                <div class="progress" style="height:20px;min-width:100px;">
+                                    <div class="progress-bar" style="width:{{ d.confianza }}%;background-color:{{ d.confianza|porcentaje_a_color }};">
+                                        {{ d.confianza }}%
+                                    </div>
+                                </div>
+                                {% else %}
+                                <span class="text-muted">-</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ d.duracion }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    {% if d.estado == 'completado' %}
+                                    <a href="{% url 'resultado' d.id %}" class="btn btn-sm btn-unefa">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    {% endif %}
+                                    {% if d.estado == 'en_curso' %}
+                                    <a href="{% url 'ver_diagnostico' d.id %}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-play"></i>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
+                <h4>No hay diagnósticos registrados</h4>
+                <p class="text-muted">Realice su primer diagnóstico para ver el historial.</p>
+                <a href="{% url 'iniciar_diagnostico' %}" class="btn btn-primary unefa-btn">
+                    <i class="fas fa-stethoscope"></i> Iniciar Diagnóstico
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="tab-pane fade" id="estadisticas">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-chart-pie"></i> Fallas por Tipo</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if fallas_count %}
+                            <ul class="list-group">
+                                {% for falla in fallas_count %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ falla.falla_encontrada|default:"No especificada"|title }}
+                                    <span class="badge bg-primary rounded-pill">{{ falla.total }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p class="text-muted">No hay datos estadísticos disponibles.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-info-circle"></i> Resumen</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    Total de diagnósticos
+                                    <span class="badge bg-primary rounded-pill">{{ total }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    Completados
+                                    <span class="badge bg-success rounded-pill">{{ diagnosticos_completados }}</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    En curso
+                                    <span class="badge bg-warning rounded-pill">{{ diagnosticos|length }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var table = document.getElementById('tabla-historial');
+        if (table) {
+            var inputs = table.querySelectorAll('input[type="search"]');
+            if (inputs.length === 0) {
+                var searchDiv = document.createElement('div');
+                searchDiv.className = 'mb-3';
+                searchDiv.innerHTML = '<input type="text" class="form-control" placeholder="Buscar en historial..." id="search-historial">';
+                table.parentElement.insertBefore(searchDiv, table);
+                document.getElementById('search-historial').addEventListener('keyup', function() {
+                    var value = this.value.toLowerCase();
+                    var rows = table.querySelectorAll('tbody tr');
+                    rows.forEach(function(row) {
+                        var text = row.textContent.toLowerCase();
+                        row.style.display = text.includes(value) ? '' : 'none';
+                    });
+                });
+            }
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends "diagnosticos/base.html" %}
+{% load static %}
+
+{% block title %}Manual de Uso - Sistema Experto{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <div class="manual-header text-center mb-5">
+                <h2><i class="fas fa-book text-primary"></i> Manual de Uso del Sistema</h2>
+                <p class="lead text-muted">Guía completa para utilizar el Sistema Experto de Diagnóstico de Fallas</p>
+            </div>
+
+            <nav class="mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Contenido</h5>
+                        <ol class="mb-0">
+                            <li><a href="#introduccion">Introducción</a></li>
+                            <li><a href="#requisitos">Requisitos del Sistema</a></li>
+                            <li><a href="#como-usar">¿Cómo usar el sistema?</a></li>
+                            <li><a href="#sintomas">Síntomas y Categorías</a></li>
+                            <li><a href="#reglas">Reglas de Diagnóstico</a></li>
+                            <li><a href="#preguntas">Preguntas del Sistema</a></li>
+                            <li><a href="#resultados">Interpretación de Resultados</a></li>
+                            <li><a href="#consejos">Consejos Útiles</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </nav>
+
+            <section id="introduccion" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-info-circle text-primary"></i> Introducción</h3>
+                        <p>El <strong>Sistema Experto para Diagnóstico de Fallas Críticas en Computadores</strong> es una herramienta inteligente diseñada para ayudar al personal administrativo de la Unidad Educativa Estatal "Prado del Norte II" a identificar y solucionar problemas comunes en los equipos de cómputo.</p>
+                        <p>El sistema utiliza un <strong>motor de inferencia basado en reglas de producción</strong> que analiza los síntomas reportados y genera un diagnóstico preciso con recomendaciones de solución.</p>
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb"></i> <strong>Nota:</strong> No se requieren conocimientos técnicos para usar el sistema. Solo debe responder las preguntas que aparecen en pantalla.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="requisitos" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-desktop text-primary"></i> Requisitos del Sistema</h3>
+                        <ul>
+                            <li>Navegador web moderno (Chrome, Firefox, Edge, Safari)</li>
+                            <li>Conexión a Internet (solo para carga inicial de librerías)</li>
+                            <li>Resolución de pantalla mínima: 320px (móvil)</li>
+                            <li>JavaScript habilitado en el navegador</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="como-usar" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-play-circle text-primary"></i> ¿Cómo usar el sistema?</h3>
+                        <div class="pasos">
+                            <div class="paso mb-3">
+                                <h5><span class="badge bg-primary me-2">1</span> Acceda al sistema</h5>
+                                <p>Abra su navegador web y diríjase a la dirección donde está instalado el sistema.</p>
+                            </div>
+                            <div class="paso mb-3">
+                                <h5><span class="badge bg-primary me-2">2</span> Inicie un diagnóstico</h5>
+                                <p>Haga clic en el botón <strong>"Iniciar Diagnóstico"</strong> en la página principal o en el menú de navegación.</p>
+                            </div>
+                            <div class="paso mb-3">
+                                <h5><span class="badge bg-primary me-2">3</span> Seleccione el síntoma principal</h5>
+                                <p>Elija de la lista el síntoma principal que presenta el equipo. Por ejemplo: "No enciende", "Pantalla azul", "Equipo lento", etc.</p>
+                            </div>
+                            <div class="paso mb-3">
+                                <h5><span class="badge bg-primary me-2">4</span> Responda las preguntas</h5>
+                                <p>El sistema le hará una serie de preguntas en lenguaje sencillo. Seleccione la opción que mejor describa lo que observa en el equipo.</p>
+                            </div>
+                            <div class="paso mb-3">
+                                <h5><span class="badge bg-primary me-2">5</span> Obtenga el diagnóstico</h5>
+                                <p>Una vez respondidas todas las preguntas, el sistema mostrará el diagnóstico con la falla identificada y las recomendaciones para solucionarla.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sintomas" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-list text-primary"></i> Síntomas y Categorías</h3>
+                        <p>El sistema puede diagnosticar problemas en las siguientes categorías:</p>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Categoría</th>
+                                        <th>Descripción</th>
+                                        <th>Ejemplos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Encendido</td><td>Problemas relacionados con el encendido del equipo</td><td>No enciende, botón defectuoso</td></tr>
+                                    <tr><td>Pantalla</td><td>Problemas de visualización en el monitor</td><td>Pantalla negra, pantalla azul</td></tr>
+                                    <tr><td>Hardware</td><td>Fallas en componentes físicos</td><td>Pitidos, ruidos extraños, sobrecalentamiento</td></tr>
+                                    <tr><td>Software</td><td>Problemas de programas y sistema operativo</td><td>Lentitud, virus, controladores</td></tr>
+                                    <tr><td>Red</td><td>Problemas de conectividad</td><td>Sin Internet, WiFi desconectado</td></tr>
+                                    <tr><td>Rendimiento</td><td>Problemas de velocidad y respuesta</td><td>Equipo lento, congelamientos</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reglas" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-gavel text-primary"></i> Reglas de Diagnóstico</h3>
+                        <p>El sistema cuenta con <strong>{{ total_reglas }} reglas de producción</strong> que relacionan síntomas con fallas específicas. Cada regla sigue el formato:</p>
+                        <div class="alert alert-secondary">
+                            <code>SI (condiciones) ENTONCES (conclusión)</code>
+                        </div>
+                        <p>Puede consultar la lista completa de reglas en la sección <a href="{% url 'reglas' %}">Reglas</a> del sistema.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="preguntas" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-question-circle text-primary"></i> Preguntas del Sistema</h3>
+                        <p>El sistema cuenta con <strong>{{ total_preguntas }} preguntas</strong> organizadas en las siguientes categorías:</p>
+                        <ul>
+                            <li><strong>Encendido:</strong> ¿El equipo enciende? ¿El botón funciona correctamente?</li>
+                            <li><strong>Pantalla:</strong> ¿Qué tipo de pantalla muestra? ¿Hay código de error?</li>
+                            <li><strong>Sonidos:</strong> ¿Se escuchan pitidos o ruidos extraños?</li>
+                            <li><strong>Temperatura:</strong> ¿El equipo se calienta demasiado?</li>
+                            <li><strong>Comportamiento:</strong> ¿Se apaga solo? ¿Se congela?</li>
+                            <li><strong>Software:</strong> ¿Hay instalaciones recientes? ¿Aparecen ventanas emergentes?</li>
+                            <li><strong>Red:</strong> ¿Tiene conexión a Internet? ¿El WiFi funciona?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="resultados" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-chart-bar text-primary"></i> Interpretación de Resultados</h3>
+                        <p>Al finalizar el diagnóstico, el sistema mostrará:</p>
+                        <ul>
+                            <li><strong>Falla detectada:</strong> Nombre y descripción del problema identificado.</li>
+                            <li><strong>Gravedad:</strong> Nivel de criticidad (Crítico, Medio, Bajo).</li>
+                            <li><strong>Confianza:</strong> Porcentaje de certeza del diagnóstico.</li>
+                            <li><strong>Recomendaciones:</strong> Pasos detallados para solucionar el problema.</li>
+                            <li><strong>Reglas activadas:</strong> Lista de reglas que coincidieron con los síntomas.</li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i> <strong>Importante:</strong> Si la confianza del diagnóstico es baja (menos del 50%), se recomienda consultar con un técnico especializado.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="consejos" class="mb-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3><i class="fas fa-lightbulb text-primary"></i> Consejos Útiles</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="consejo-card p-3 mb-3">
+                                    <h5><i class="fas fa-shield-alt text-success"></i> Mantenimiento preventivo</h5>
+                                    <p>Realice limpieza periódica del equipo para evitar sobrecalentamiento y fallas prematuras.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="consejo-card p-3 mb-3">
+                                    <h5><i class="fas fa-sync text-info"></i> Actualizaciones</h5>
+                                    <p>Mantenga el sistema operativo y los programas actualizados para evitar vulnerabilidades.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="consejo-card p-3 mb-3">
+                                    <h5><i class="fas fa-database text-warning"></i> Copias de seguridad</h5>
+                                    <p>Realice respaldos periódicos de su información importante para evitar pérdida de datos.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="consejo-card p-3 mb-3">
+                                    <h5><i class="fas fa-virus-slash text-danger"></i> Antivirus</h5>
+                                    <p>Use un antivirus actualizado y evite descargar archivos de fuentes no confiables.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "diagnosticos/base.html" %}
+{% load static %}
+
+{% block title %}Reglas del Sistema - Sistema Experto{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-gavel text-primary"></i> Reglas de Producción</h2>
+        <div>
+            <a href="{% url 'reglas' %}" class="btn btn-sm btn-outline-primary {% if not categoria_seleccionada %}active{% endif %}">Todas</a>
+            {% for cat in categorias %}
+            <a href="{% url 'reglas' %}?categoria={{ cat }}" class="btn btn-sm btn-outline-primary {% if categoria_seleccionada == cat %}active{% endif %}">{{ cat|title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i> 
+        El sistema utiliza <strong>{{ reglas|length }} reglas de producción</strong> del tipo <strong>SI-ENTONCES</strong> para realizar diagnósticos mediante encadenamiento hacia adelante.
+    </div>
+
+    {% if reglas %}
+    <div class="row">
+        {% for regla in reglas %}
+        <div class="col-lg-6 mb-4">
+            <div class="card regla-card h-100">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <span class="badge bg-primary me-2">{{ regla.id }}</span>
+                        {{ regla.nombre }}
+                    </h5>
+                    <span class="badge bg-{% if regla.categoria == 'hardware' %}danger{% elif regla.categoria == 'software' %}success{% elif regla.categoria == 'red' %}info{% else %}secondary{% endif %}">
+                        {{ regla.categoria }}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong><i class="fas fa-arrow-right text-success"></i> Condiciones (SI):</strong>
+                        <ul class="list-unstyled mt-2">
+                            {% for key, val in regla.condiciones.items %}
+                            <li><code>{{ key }} = {{ val }}</code></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="mb-3">
+                        <strong><i class="fas fa-check-circle text-info"></i> Conclusión (ENTONCES):</strong>
+                        <p class="mb-0"><code>{{ regla.conclusion }}</code></p>
+                    </div>
+                    {% if regla.explicacion %}
+                    <div class="mb-3">
+                        <strong><i class="fas fa-comment text-warning"></i> Explicación:</strong>
+                        <p class="text-muted mb-0">{{ regla.explicacion }}</p>
+                    </div>
+                    {% endif %}
+                    {% if regla.acciones %}
+                    <div>
+                        <strong><i class="fas fa-tools text-primary"></i> Acciones:</strong>
+                        <ul class="mb-0">
+                            {% for accion in regla.acciones %}
+                            <li><small>{{ accion }}</small></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Prioridad: {{ regla.prioridad }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-gavel fa-4x text-muted mb-3"></i>
+        <h4>No hay reglas registradas</h4>
+        <p class="text-muted">Las reglas de producción se cargan automáticamente desde la base de conocimiento.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
