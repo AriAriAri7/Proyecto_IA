@@ -32,3 +32,17 @@ INFO 2026-07-07 17:39:13,228 motor_inferencia Regla activada: R003 - Sobrecalent
 INFO 2026-07-07 17:39:13,236 motor_inferencia Regla activada: R005 - Falla de disco duro o SSD
 INFO 2026-07-07 17:39:13,239 motor_inferencia Regla activada: R009 - Falla de ventiladores
 INFO 2026-07-07 17:39:13,239 motor_inferencia Diagnostico completado: Sobrecalentamiento del Equipo (confianza: 100%)
+INFO 2026-07-11 14:07:31,554 motor_inferencia Hecho agregado: no_enciende = False
+INFO 2026-07-11 14:07:45,260 motor_inferencia Hecho agregado: pantalla_negra = False
+INFO 2026-07-11 14:07:53,552 motor_inferencia Hecho agregado: pitidos_continuos = False
+INFO 2026-07-11 14:07:58,168 motor_inferencia Hecho agregado: ruidos_extranos = True
+INFO 2026-07-11 14:08:02,878 motor_inferencia Hecho agregado: calor_excesivo = True
+INFO 2026-07-11 14:08:07,910 motor_inferencia Hecho agregado: se_apaga_solo = True
+INFO 2026-07-11 14:08:12,486 motor_inferencia Hecho agregado: sistema_lento = True
+INFO 2026-07-11 14:08:12,488 motor_inferencia Motor de inferencia inicializado correctamente
+INFO 2026-07-11 14:08:12,488 motor_inferencia Iniciando inferencia con hechos: {'sintoma_principal': 'se_apaga_solo', 'no_enciende': False, 'pantalla_negra': False, 'pitidos_continuos': False, 'ruidos_extranos': True, 'calor_excesivo': True, 'se_apaga_solo': True, 'sistema_lento': True}
+INFO 2026-07-11 14:08:12,488 motor_inferencia Regla activada: R003 - Sobrecalentamiento
+INFO 2026-07-11 14:08:12,488 motor_inferencia Regla activada: R005 - Falla de disco duro o SSD
+INFO 2026-07-11 14:08:12,488 motor_inferencia Regla activada: R009 - Falla de ventiladores
+INFO 2026-07-11 14:08:12,488 motor_inferencia Diagnostico completado: Sobrecalentamiento del Equipo (confianza: 100%)
+INFO 2026-07-11 14:21:14,490 motor_inferencia Hecho agregado: pantalla_negra = False

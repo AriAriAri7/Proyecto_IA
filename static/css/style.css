@@ -114,9 +114,14 @@ a:hover {
 }
 
 .hero-logo {
-    max-width: 250px;
+   
+    max-width: 600px;
+    width: 100%; /* La imagen será fluida, ocupando hasta el 100% de su contenedor */
     filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+    height: auto; /* IMPORTANTE: Mantener la proporción al escalar */
+
 }
+
 
 .unefa-btn {
     background: linear-gradient(135deg, var(--unefa-secondary) 0%, #e65100 100%);
@@ -347,6 +352,7 @@ a:hover {
     border-color: var(--unefa-primary);
     background: rgba(26, 35, 126, 0.05);
     transform: translateX(5px);
+    color: darken(var(--unefa-primary), 10%);
 }
 
 .opcion-btn.selected {
